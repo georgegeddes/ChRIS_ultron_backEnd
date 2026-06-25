@@ -34,6 +34,10 @@ attach: (docker-compose '--profile=cube attach chris | grep -Fv "\"GET /api/v1/u
 [group('(3) development')]
 shell: (run 'python manage.py shell')
 
+# Open a Postgres shell.
+[group('(3) development')]
+dbshell: (run 'python manage.py dbshell')
+
 # Open a Bash shell.
 [group('(3) development')]
 bash: (run 'bash')

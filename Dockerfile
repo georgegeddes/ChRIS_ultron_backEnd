@@ -36,6 +36,11 @@ COPY --chown=default:root ./requirements/ /tmp/requirements
 ARG ENVIRONMENT=production
 RUN pip install -r /tmp/requirements/$ENVIRONMENT.txt && rm -rf /tmp/requirements
 COPY chris_backend/ ./
+
+USER root
+RUN [ "$ENVIRONMENT" = "local" ] && dnf install -y postgresql
+USER default
+
 RUN if [ "$ENVIRONMENT" = "production" ]; then \
     env DJANGO_SETTINGS_MODULE=config.settings.common ./manage.py collectstatic; fi
 
