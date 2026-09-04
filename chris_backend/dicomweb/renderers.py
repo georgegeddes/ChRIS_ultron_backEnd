@@ -108,20 +108,6 @@ class DicomJsonRenderer(JSONRenderer):
                               renderer_context)
 
 
-class ApplicationJsonDicomRenderer(DicomJsonRenderer):
-    """
-    The same DICOM JSON Model bytes advertised as ``application/json``. QIDO-RS
-    requires ``Accept: application/json`` be treated as equivalent to
-    ``application/dicom+json`` (PS3.18 §10.6.2), and it is handy for curl.
-
-    NOTE: This renderer conflicts with the default JSONRenderer. When
-    implementing views, pay attention to the order of
-    renderer_classes!
-    """
-    media_type = 'application/json'
-    format = 'json'
-
-
 def _to_json_model(data):
     """Convert DicomAttribute datasets into DICOM JSON Model objects."""
     # A bare attribute is treated as a one-attribute dataset
